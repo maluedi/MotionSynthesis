@@ -1,6 +1,6 @@
 #pragma once
 
-#include <eigen3.2.5\Eigen\dense>
+#include <eigen3.2.5\Eigen\Dense>
 //#include <eigen3.2.5\Eigen\Geometry>
 
 #include <string>
