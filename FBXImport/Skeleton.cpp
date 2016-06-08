@@ -1,6 +1,6 @@
 #include "Skeleton.h"
 
-Skeleton::Joint& Skeleton::Joint::operator=(const Joint & _jt) {
+Skeleton::Joint& Skeleton::Joint::operator=(const Joint& _jt) {
 	this->m_id = _jt.m_id;
 	this->m_name = _jt.m_name;
 	this->m_offset = _jt.m_offset;
@@ -11,8 +11,9 @@ Skeleton::Joint& Skeleton::Joint::operator=(const Joint & _jt) {
 	this->m_children.clear();
 	this->m_children.resize(_jt.m_children.size());
 	for (int i = 0; i < this->m_children.size(); i++) {
-		this->m_children[i] = _jt.m_children[i];
-		this->m_children[i].m_parent = this;
+		this->m_children[i] = new Joint();
+		*(this->m_children[i]) = *(_jt.m_children[i]);
+		this->m_children[i]->m_parent = this;
 	}
 
 	return *this;
@@ -53,9 +54,9 @@ int Skeleton::setToTime(int _i) {
 	m_root->m_offset = m_X[pose];
 	m_root->m_rotation = m_Q[pose][0];
 	int nJoints = numJoints();
-	for (int i = 1; i < nJoints; i++) {
-		Joint* tJoint = findJoint(i);
-		tJoint->m_rotation = m_Q[pose][i];
+	for (int jt = 1; jt < nJoints; jt++) {
+		Joint* tJoint = findJoint(jt);
+		tJoint->m_rotation = m_Q[pose][jt];
 	}
 }
 
@@ -68,7 +69,7 @@ int Skeleton::numJoints(Joint* _jt) const {
 	if (_jt) {
 		size = 1;
 		for (int i = 0; i < _jt->m_children.size(); i++) {
-			size += numJoints(&_jt->m_children[i]);
+			size += numJoints(_jt->m_children[i]);
 		}
 	}
 	return size;
@@ -87,7 +88,7 @@ Skeleton::Joint* Skeleton::findJoint(int _idx, Joint* _jt) const {
 		return _jt;
 	} else {
 		for (int i = 0; i < _jt->m_children.size(); i++) {
-			Joint* tJoint = findJoint(_idx, &_jt->m_children[i]);
+			Joint* tJoint = findJoint(_idx, _jt->m_children[i]);
 			if (tJoint) {
 				return tJoint;
 			}
@@ -105,7 +106,7 @@ Skeleton::Joint* Skeleton::findJoint(const std::string& _name, Joint* _jt) const
 		return _jt;
 	} else {
 		for (int i = 0; i < _jt->m_children.size(); i++) {
-			Joint* tJoint = findJoint(_name, &_jt->m_children[i]);
+			Joint* tJoint = findJoint(_name, _jt->m_children[i]);
 			if (tJoint) {
 				return tJoint;
 			}

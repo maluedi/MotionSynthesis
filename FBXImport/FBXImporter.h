@@ -10,7 +10,7 @@ public:
 	FbxManager*	manager;
 	FbxScene* scene;
 	FbxNode* root;
-	FbxTime startTime, stopTime, currentTime, frameTime;
+	FbxTime startTime, stopTime, frameTime;
 
 	FBXImporter(const char* fileName);
 	~FBXImporter();
@@ -25,4 +25,5 @@ public:
 
 	void buildHierarchy(FbxNode* _pNode, Skeleton::Joint* _pJoint, int count = 0);
 
+	void loadAnimation(Skeleton& _sk);
 };

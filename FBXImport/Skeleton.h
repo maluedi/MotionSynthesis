@@ -17,7 +17,7 @@ public:
 		Eigen::Vector3d m_offset;
 		Eigen::Quaterniond m_rotation;
 		Joint* m_parent;
-		std::vector<Joint> m_children;
+		std::vector<Joint*> m_children;
 
 		Joint& operator=(const Joint& _jt);
 
