@@ -1,5 +1,5 @@
-#include "FBXImporter.h"
-#include "Skeleton.h"
+#include <FBXImporter.h>
+#include <Skeleton.h>
 
 FBXImporter::FBXImporter(const char* fileName) {
 	manager = FbxManager::Create();

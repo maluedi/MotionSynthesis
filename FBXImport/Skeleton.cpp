@@ -1,4 +1,4 @@
-#include "Skeleton.h"
+#include <Skeleton.h>
 
 Skeleton::Joint& Skeleton::Joint::operator=(const Joint& _jt) {
 	this->m_id = _jt.m_id;
@@ -58,6 +58,7 @@ int Skeleton::setToTime(int _i) {
 		Joint* tJoint = findJoint(jt);
 		tJoint->m_rotation = m_Q[pose][jt];
 	}
+	return pose;
 }
 
 int Skeleton::numJoints() const {
