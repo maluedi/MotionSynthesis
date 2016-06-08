@@ -2,7 +2,7 @@
 
 #include <fbxsdk\fbxsdk.h>
 
-#include "Skeleton.h"
+#include <FBXImport\Skeleton.h>
 
 class FBXImporter
 {
